@@ -14,6 +14,7 @@ Gem::Specification.new do |s|
 
   s.platform = Gem::Platform::RUBY
 
+  s.add_dependency 'nio4r',            '~> 1.2'
   s.add_dependency 'activesupport',    '>= 4.2.0'
   s.add_dependency 'actionpack',       '>= 4.2.0'
   s.add_dependency 'faye-websocket',   '~> 0.10.0'
