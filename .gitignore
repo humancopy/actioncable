@@ -1,2 +1,2 @@
-/gemfiles/*.lock
-/test/tests.log
+/lib/assets/compiled
+/tmp
