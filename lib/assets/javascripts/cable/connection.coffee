@@ -16,7 +16,7 @@ class Cable.Connection
       false
 
   open: =>
-    if @webSocket and not @isState("closed")
+    if @isActive()
       throw new Error("Existing connection must be closed before opening")
     else
       @webSocket = new WebSocket(@consumer.url)
@@ -24,19 +24,23 @@ class Cable.Connection
       true
 
   close: ->
-    @webSocket?.close()
+    @webSocket?.close() if @isActive()
 
   reopen: ->
-    if @isState("closed")
-      @open()
-    else
+    if @isActive()
       try
         @close()
       finally
         setTimeout(@open, @constructor.reopenDelay)
+    else
+      @open()
+
 
   isOpen: ->
     @isState("open")
+
+  isActive: ->
+    @isState("open", "connecting")
 
   # Private
 
